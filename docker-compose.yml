@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+    container_name: tumaguro-db
+    image: postgres:14
+    volumes:
+      - dbdata:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+  api:
+    container_name: tumaguro-api
+    build: .
+    command: pipenv run uvicorn api.main:app --host 0.0.0.0 --reload
+    volumes:
+      - .:/opt
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+
+  adminer:
+    container_name: tumaguro-adminer
+    image: adminer:4.7.5
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  dbdata: null
