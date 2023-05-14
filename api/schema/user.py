@@ -12,3 +12,9 @@ class SignupUser(BaseModel):
     email:str
     username:str
     password:str
+class SigninUser(BaseModel):
+    email:str
+    password:str
+
+class AuthInfo(BaseModel):
+    jwt:str
