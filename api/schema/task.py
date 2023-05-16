@@ -16,7 +16,7 @@ class Task(BaseModel):
 
 class PostTask(BaseModel):
     name:str
-    dead_line:str
+    dead_line:datetime
 
 class PostTaskResult(BaseModel):
     name:str
