@@ -18,3 +18,6 @@ class PostSchedule(BaseModel):
 
 class GetScheduleResult(BaseModel):
     schedules :list[Schedule]
+
+class DeleteScheduleResult(BaseModel):
+    status:str
