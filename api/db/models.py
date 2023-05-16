@@ -20,4 +20,5 @@ class Task(Base):
     created_at = Column(DateTime,default=datetime.now().strftime('%x %X'))
     finished_at = Column(DateTime,nullable=True,default=None)
     dead_line = Column(DateTime,nullable=False)
+    user_id = Column(String,nullable=False)
 

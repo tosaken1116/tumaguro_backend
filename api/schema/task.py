@@ -1,11 +1,18 @@
+from datetime import datetime
+from typing import Optional
+
 from pydantic import BaseModel
+
 
 class Task(BaseModel):
     id:str
     name:str
-    finished_at:str
-    created_at:str
-    dead_line:str
+    finished_at:Optional[datetime]
+    created_at:datetime
+    dead_line:datetime
+    user_id:str
+    class Config:
+        orm_mode=True
 
 class PostTask(BaseModel):
     name:str
@@ -15,3 +22,6 @@ class PostTaskResult(BaseModel):
     name:str
     class Config:
         orm_mode=True
+
+class GetTaskResult(BaseModel):
+    tasks:list[Task]
