@@ -25,3 +25,5 @@ class PostTaskResult(BaseModel):
 
 class GetTaskResult(BaseModel):
     tasks:list[Task]
+class DeleteTaskResult(BaseModel):
+    status:str
