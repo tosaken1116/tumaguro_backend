@@ -26,3 +26,9 @@ def signin(db,email:str,password:str):
     if user.password_hash != gen_password_hash(password):
         raise HTTPException(status_code=403,detail="password is incorrect")
     return generate_token(user.id)
+
+def get_user_by_id(db,id:str):
+    user = db.query(User).filter(User.id == id).first()
+    if user is None:
+        raise HTTPException(status_code=400,detail="user does not exist")
+    return user
