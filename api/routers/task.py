@@ -24,5 +24,4 @@ async def delete_task_one(task_id:str, db:Session = Depends(get_db),current_user
 
 @task_router.put("/{task_id}",response_model=PutTaskResult)
 async def update_task_one(task_id:str,payload:PostTask, db:Session = Depends(get_db),current_user=Depends(get_current_user)):
-    print(payload)
     return update_task_by_id(db,current_user.id,task_id,payload.name,payload.dead_line)

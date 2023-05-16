@@ -33,8 +33,6 @@ def delete_task_by_id(db,user_id,task_id):
         raise HTTPException(status_code=500,detail="delete failed")
 
 def update_task_by_id(db,user_id,task_id,name,dead_line):
-    print(user_id)
-    print(task_id)
     update_task_orm = db.query(Task).filter(Task.id == task_id).filter(Task.user_id==user_id).first()
     if update_task_orm is None:
         raise HTTPException(status_code=404,detail="task not found")
