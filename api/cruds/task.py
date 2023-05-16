@@ -3,8 +3,8 @@ from datetime import datetime
 from fastapi import HTTPException
 
 from api.db.models import Task
-from api.schema.task import GetTaskResult as GetSchema
 from api.schema.task import PostTaskResult as PostSchema
+from api.schema.task import PutTaskResult as PutSchema
 from api.schema.task import Task as TaskSchema
 
 
@@ -22,12 +22,25 @@ def get_task_by_user_id(db,user_id):
     return {"tasks":tasks}
 
 def delete_task_by_id(db,user_id,task_id):
-        delete_task_orm =db.query(Task).filter(Task.id == task_id).filter(Task.user_id==user_id).first()
-        if delete_task_orm is None:
-            raise HTTPException(status_code=404,detail="task not found")
-        try:
-            db.delete(delete_task_orm)
-            db.commit()
-            return {"status":"success"}
-        except:
-            raise HTTPException(status_code=500,detail="delete failed")
+    delete_task_orm =db.query(Task).filter(Task.id == task_id).filter(Task.user_id==user_id).first()
+    if delete_task_orm is None:
+        raise HTTPException(status_code=404,detail="task not found")
+    try:
+        db.delete(delete_task_orm)
+        db.commit()
+        return {"status":"success"}
+    except:
+        raise HTTPException(status_code=500,detail="delete failed")
+
+def update_task_by_id(db,user_id,task_id,name,dead_line):
+    print(user_id)
+    print(task_id)
+    update_task_orm = db.query(Task).filter(Task.id == task_id).filter(Task.user_id==user_id).first()
+    if update_task_orm is None:
+        raise HTTPException(status_code=404,detail="task not found")
+    update_task_orm.name = name
+    update_task_orm.dead_line = dead_line
+    db.add(update_task_orm)
+    db.commit()
+    db.refresh(update_task_orm)
+    return PutSchema.from_orm(update_task_orm)

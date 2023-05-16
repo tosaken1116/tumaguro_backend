@@ -27,3 +27,10 @@ class GetTaskResult(BaseModel):
     tasks:list[Task]
 class DeleteTaskResult(BaseModel):
     status:str
+
+class PutTaskResult(BaseModel):
+    name:str
+    dead_line:datetime
+
+    class Config:
+        orm_mode=True
