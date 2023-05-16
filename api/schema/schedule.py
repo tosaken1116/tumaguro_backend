@@ -15,3 +15,6 @@ class PostSchedule(BaseModel):
     name:str
     start_time:datetime
     end_time:datetime
+
+class GetScheduleResult(BaseModel):
+    schedules :list[Schedule]
