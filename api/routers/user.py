@@ -1,8 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm.session import Session
 
-from api.cruds.user import create_new_user
-from api.cruds.user import signin as login
+from api.cruds.user import create_new_user, signin as login
 from api.db.database import get_db
 from api.schema.user import AuthInfo, SigninUser, SignupUser, User
 
@@ -14,4 +13,4 @@ async def signup(payload:SignupUser,db:Session =Depends(get_db)):
 
 @user_router.post("/signin",response_model=AuthInfo)
 async def signin(payload:SigninUser,db:Session =Depends(get_db)):
-    return {"jwt":login(db,payload.email,payload.password)}
+    return login(db,payload.email,payload.password)

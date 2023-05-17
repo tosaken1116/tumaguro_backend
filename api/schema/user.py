@@ -16,5 +16,7 @@ class SigninUser(BaseModel):
     email:str
     password:str
 
+
+
 class AuthInfo(BaseModel):
     jwt:str

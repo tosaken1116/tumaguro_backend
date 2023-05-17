@@ -18,19 +18,8 @@ class PostTask(BaseModel):
     name:str
     dead_line:datetime
 
-class PostTaskResult(BaseModel):
-    name:str
-    class Config:
-        orm_mode=True
 
 class GetTaskResult(BaseModel):
     tasks:list[Task]
 class DeleteTaskResult(BaseModel):
     status:str
-
-class PutTaskResult(BaseModel):
-    name:str
-    dead_line:datetime
-
-    class Config:
-        orm_mode=True
