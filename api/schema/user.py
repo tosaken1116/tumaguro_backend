@@ -16,6 +16,9 @@ class SigninUser(BaseModel):
     email:str
     password:str
 
+class UpdateUser(BaseModel):
+    username:str
+
 
 
 class AuthInfo(BaseModel):

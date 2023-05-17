@@ -33,3 +33,13 @@ def get_user_by_id(db,id:str)->UserSchema:
     if user is None:
         raise HTTPException(status_code=400,detail="user does not exist")
     return user
+
+def update_user_by_id(db,user_id:str,username:str):
+    user = db.query(User).filter(User.id == user_id).first()
+    if user is None:
+        raise HTTPException(status_code=404,detail="user does not exist")
+    user.username = username
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return UserSchema.from_orm(user)
