@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from fastapi import HTTPException
+from sqlalchemy import asc
 
 from api.db.models import Task
 from api.schema.task import DeleteTaskResult as DeleteSchema
@@ -14,7 +15,7 @@ def add_new_task(db,name:str,dead_line:str,user_id:str)->TaskSchema:
     return TaskSchema.from_orm(new_task)
 
 def get_task_by_user_id(db,user_id:str)->TaskSchema:
-    task_orms = db.query(Task).filter(Task.user_id == user_id).all()
+    task_orms = db.query(Task).filter(Task.user_id == user_id).order_by(asc(Task.dead_line)).all()
     tasks = []
     for task_orm in task_orms:
         tasks.append(TaskSchema.from_orm(task_orm))
