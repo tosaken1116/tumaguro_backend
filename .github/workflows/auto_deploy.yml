@@ -34,4 +34,4 @@ jobs:
                       StrictHostKeyChecking no
             - name: install
               run: |
-                  ssh vps "cd ./tumaguro_backend/; docker compose down; docker compose up --build -d;"
+                  ssh vps "cd ./tumaguro_backend/; git pull origin main; docker compose down; docker compose up --build -d;"
