@@ -3,8 +3,8 @@ from datetime import datetime
 class Schedule(BaseModel):
     id:str
     name:str
-    start_time:datetime
-    end_time:datetime
+    start:datetime
+    end:datetime
     created_at:datetime
     user_id:str
     comment:str
@@ -14,8 +14,8 @@ class Schedule(BaseModel):
 
 class PostSchedule(BaseModel):
     name:str
-    start_time:datetime
-    end_time:datetime
+    start:datetime
+    end:datetime
     comment:str
 
 class GetScheduleResult(BaseModel):

@@ -58,7 +58,7 @@ def invitation_reception(db,invitation_id:str,recipient_email:str,recipient_id:s
         invited_schedule = db.query(Schedule).filter(Invitation.id == invitation_id).first()
         if invited_schedule is None:
             raise HTTPException(status_code=404,detail="invitation does not exist")
-        new_schedule = new_schedule =Schedule(name=invited_schedule.name,start_time=invited_schedule.start_time,end_time=invited_schedule.end_time,user_id=recipient_id)
+        new_schedule = new_schedule =Schedule(name=invited_schedule.name,start=invited_schedule.start,end=invited_schedule.end,user_id=recipient_id)
         db.add(new_schedule)
         db.commit()
         db.refresh(new_schedule)
