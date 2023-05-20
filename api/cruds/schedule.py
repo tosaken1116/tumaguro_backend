@@ -5,8 +5,8 @@ from api.db.models import Schedule
 from api.schema.schedule import Schedule as ScheduleSchema
 
 
-def add_new_schedule(db,name,start,end,comment,user_id):
-    new_schedule =Schedule(name=name,start=start,end=end,user_id=user_id,comment=comment)
+def add_new_schedule(db,title,start,end,comment,user_id):
+    new_schedule =Schedule(title=title,start=start,end=end,user_id=user_id,comment=comment)
     db.add(new_schedule)
     db.commit()
     return ScheduleSchema.from_orm(new_schedule)
@@ -28,11 +28,11 @@ def delete_schedule_by_id(db,schedule_id,user_id):
     except:
         raise HTTPException(status_code=500,detail="delete failed")
 
-def update_schedule_by_id(db,schedule_id,user_id,name,start,end,comment):
+def update_schedule_by_id(db,schedule_id,user_id,title,start,end,comment):
     update_schedule_orm = db.query(Schedule).filter(Schedule.id == schedule_id).filter(Schedule.user_id == user_id).first()
     if update_schedule_orm is None:
         raise HTTPException(status_code=404,detail="schedule does not exist")
-    update_schedule_orm.name = name
+    update_schedule_orm.title = title
     update_schedule_orm.start = start
     update_schedule_orm.end = end
     update_schedule_orm.comment = comment

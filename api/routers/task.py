@@ -11,7 +11,7 @@ task_router = APIRouter()
 
 @task_router.post("/add",response_model=Task)
 async def add_task(payload:PostTask,db:Session = Depends(get_db),current_user=Depends(get_current_user)):
-    return add_new_task(db,payload.name,payload.dead_line,current_user.id,payload.comment)
+    return add_new_task(db,payload.title,payload.dead_line,current_user.id,payload.comment)
 
 @task_router.get("/my",response_model=GetTaskResult)
 async def get_my_task(db:Session = Depends(get_db),current_user=Depends(get_current_user)):
@@ -23,4 +23,4 @@ async def delete_task_one(task_id:str, db:Session = Depends(get_db),current_user
 
 @task_router.put("/{task_id}",response_model=Task)
 async def update_task_one(task_id:str,payload:PostTask, db:Session = Depends(get_db),current_user=Depends(get_current_user)):
-    return update_task_by_id(db,current_user.id,task_id,payload.name,payload.dead_line,payload.comment)
+    return update_task_by_id(db,current_user.id,task_id,payload.title,payload.dead_line,payload.comment)

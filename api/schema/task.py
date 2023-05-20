@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 class Task(BaseModel):
     id:str
-    name:str
+    title:str
     finished_at:Optional[datetime]
     created_at:datetime
     dead_line:datetime
@@ -16,7 +16,7 @@ class Task(BaseModel):
         orm_mode=True
 
 class PostTask(BaseModel):
-    name:str
+    title:str
     dead_line:datetime
     comment:str
 

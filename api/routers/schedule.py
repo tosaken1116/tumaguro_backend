@@ -12,7 +12,7 @@ schedule_router = APIRouter()
 
 @schedule_router.post("/add",response_model=Schedule)
 async def add_schedule(payload:PostSchedule,db:Session=Depends(get_db),current_user=Depends(get_current_user)):
-    return add_new_schedule(db,payload.name,payload.start,payload.end,payload.comment,current_user.id)
+    return add_new_schedule(db,payload.title,payload.start,payload.end,payload.comment,current_user.id)
 @schedule_router.get("/my",response_model=GetScheduleResult)
 async def get_my_schedule(db:Session=Depends(get_db),current_user=Depends(get_current_user)):
     return get_schedule_by_user_id(db,current_user.id)
@@ -21,4 +21,4 @@ async def delete_schedule_one(schedule_id:str,db:Session=Depends(get_db),current
     return delete_schedule_by_id(db,schedule_id,current_user.id)
 @schedule_router.put("/{schedule_id}",response_model=Schedule)
 async def update_schedule_one(schedule_id:str,payload:PostSchedule,db:Session=Depends(get_db),current_user=Depends(get_current_user)):
-    return update_schedule_by_id(db,schedule_id,current_user.id,payload.name,payload.start,payload.end,payload.comment)
+    return update_schedule_by_id(db,schedule_id,current_user.id,payload.title,payload.start,payload.end,payload.comment)

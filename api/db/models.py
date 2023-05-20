@@ -18,7 +18,7 @@ class User(Base):
 class Task(Base):
     __tablename__ = 'task'
     id = Column(String,primary_key=True,default=gen_uuid)
-    name = Column(String,nullable=False)
+    title = Column(String,nullable=False)
     created_at = Column(DateTime,default=datetime.now().strftime('%x %X'))
     finished_at = Column(DateTime,nullable=True,default=None)
     dead_line = Column(DateTime,nullable=False)
@@ -28,7 +28,7 @@ class Task(Base):
 class Schedule(Base):
     __tablename__ = 'schedule'
     id = Column(String,primary_key=True,default=gen_uuid)
-    name = Column(String,nullable=False)
+    title = Column(String,nullable=False)
     created_at = Column(DateTime,default=datetime.now().strftime('%x %X'))
     start = Column(DateTime,nullable=False)
     end = Column(DateTime,nullable=False)

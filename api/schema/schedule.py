@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 class Schedule(BaseModel):
     id:str
-    name:str
+    title:str
     start:datetime
     end:datetime
     created_at:datetime
@@ -13,7 +13,7 @@ class Schedule(BaseModel):
 
 
 class PostSchedule(BaseModel):
-    name:str
+    title:str
     start:datetime
     end:datetime
     comment:str
