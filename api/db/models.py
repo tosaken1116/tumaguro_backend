@@ -23,6 +23,7 @@ class Task(Base):
     finished_at = Column(DateTime,nullable=True,default=None)
     dead_line = Column(DateTime,nullable=False)
     user_id = Column(String,nullable=False)
+    comment = Column(String)
 
 class Schedule(Base):
     __tablename__ = 'schedule'
@@ -33,6 +34,7 @@ class Schedule(Base):
     end_time = Column(DateTime,nullable=False)
     user_id = Column(String,nullable=False)
     invitation = relationship("Invitation", foreign_keys="Invitation.schedule_id")
+    comment = Column(String)
 
 class Invitation(Base):
     __tablename__ = 'invitations'

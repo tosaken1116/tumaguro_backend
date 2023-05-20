@@ -7,6 +7,7 @@ class Schedule(BaseModel):
     end_time:datetime
     created_at:datetime
     user_id:str
+    comment:str
     class Config:
         orm_mode=True
 
@@ -15,6 +16,7 @@ class PostSchedule(BaseModel):
     name:str
     start_time:datetime
     end_time:datetime
+    comment:str
 
 class GetScheduleResult(BaseModel):
     schedules :list[Schedule]

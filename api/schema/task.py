@@ -11,12 +11,14 @@ class Task(BaseModel):
     created_at:datetime
     dead_line:datetime
     user_id:str
+    comment:str
     class Config:
         orm_mode=True
 
 class PostTask(BaseModel):
     name:str
     dead_line:datetime
+    comment:str
 
 
 class GetTaskResult(BaseModel):
