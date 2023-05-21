@@ -43,3 +43,16 @@ def update_task_by_id(db,user_id:str,task_id:str,title:str,dead_line:datetime,co
     db.commit()
     db.refresh(update_task_orm)
     return TaskSchema.from_orm(update_task_orm)
+
+def finish_task_by_id(db,user_id,task_id):
+    finish_task_orm = db.query(Task).filter(Task.id == task_id).filter(Task.user_id==user_id).first()
+    if finish_task_orm is None:
+        raise HTTPException(status_code=404,detail="task not found")
+    if(finish_task_orm.user_id != user_id):
+        raise HTTPException(status_code=403,detail="this task is not yours")
+
+    finish_task_orm.finished_at = datetime.now().strftime('%x %X')
+    db.add(finish_task_orm)
+    db.commit()
+    db.refresh(finish_task_orm)
+    return {"status":"success"}
