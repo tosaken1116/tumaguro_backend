@@ -20,6 +20,7 @@ class GetInvitationResultOne(BaseModel):
     created_at:datetime
     id:str
     sender_email:str
+    recipient_email:str
     schedule:Schedule
     class Config:
         orm_mode=True
