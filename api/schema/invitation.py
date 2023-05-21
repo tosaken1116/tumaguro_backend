@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -20,6 +21,7 @@ class GetInvitationResultOne(BaseModel):
     created_at:datetime
     id:str
     sender_email:str
+    is_recept:Optional[bool]
     recipient_email:str
     schedule:Schedule
     class Config:
